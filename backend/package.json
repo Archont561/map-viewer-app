@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "npx concurrently \"npx tsc --watch\" \"node dist/server.js\"",
+    "start": "nodemon dist/server.js"
+  }
+}

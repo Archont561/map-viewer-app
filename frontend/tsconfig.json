@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+      "target": "ES5",
+      "module": "CommonJS",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "outDir": "./dist",
+      "rootDir": "./src"
+    },
+    "include": [
+      "src/js/*.ts",
+      "src/js/**/*.ts",
+      "src/js/**/**/*.ts",
+    ],
+    "exclude": [
+      "node_modules",
+      "dist",
+    ]
+  }
