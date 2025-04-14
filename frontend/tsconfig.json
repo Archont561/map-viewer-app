@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
-      "target": "ES5",
+      "target": "ES6",
+      "lib": [
+        "ES2017",
+        "DOM"
+      ],
       "module": "CommonJS",
       "moduleResolution": "node",
       "esModuleInterop": true,
@@ -10,15 +14,18 @@
       "skipLibCheck": true,
       "resolveJsonModule": true,
       "outDir": "./dist",
-      "rootDir": "./src"
+      "rootDir": "./src",
+      "typeRoots": [
+        "node_modules/@types", 
+        "node_modules/@arcgis/core", 
+      ]
     },
     "include": [
-      "src/js/*.ts",
-      "src/js/**/*.ts",
-      "src/js/**/**/*.ts",
+      "./src/js/*.ts",
+      "./src/js/**/*.ts",
     ],
     "exclude": [
-      "node_modules",
       "dist",
+      "node_modules"
     ]
   }

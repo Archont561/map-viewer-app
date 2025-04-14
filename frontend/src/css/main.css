@@ -1,5 +1,6 @@
+@import url("https://js.arcgis.com/4.31/esri/themes/light/main.css");
 @import "tailwindcss";
-@plugin "daisyui";
+/* @plugin "daisyui";
 
 @plugin "daisyui/theme" {
     name: "light";
@@ -70,4 +71,4 @@
     --border: 2px;
     --depth: 0;
     --noise: 0;
-}
+} */

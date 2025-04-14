@@ -1,5 +1,5 @@
 import "../css/main.css";
-import SimpleGreeting from "./components/Element";
+import "./components/EsriVectorTileViewer";
+// import  "alpinejs";
 
-console.log(SimpleGreeting.properties);
-console.log("testing");
+
