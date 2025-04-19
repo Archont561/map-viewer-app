@@ -1,1 +1,0 @@
-import{O as e,a9 as f,aa as i}from"./index-8or3xOo5.js";import{c as m}from"./query-CDDoMS_j.js";async function w(a,r,t){const n=await u(a,r,t);return e.fromJSON(n)}async function u(a,r,t){const n=f(a),s={...t},o=i.from(r),{data:c}=await m(n,o,o.sourceSpatialReference,s);return c}export{u as a,w as s};
