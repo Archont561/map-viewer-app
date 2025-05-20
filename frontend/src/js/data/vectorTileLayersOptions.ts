@@ -1,12 +1,4 @@
-export type PopupTemplatePropertiesBuilder = (
-    sourceFeatureLayer?: __esri.FeatureLayer
-) => __esri.PopupTemplateProperties;
-
-interface PopupTemplateEntry {
-    id: string;
-    popupTemplatePropertiesBuilder: PopupTemplatePropertiesBuilder;
-}
-
+import { PopupTemplateEntry, PopupTemplatePropertiesBuilder } from "../types";
 
 const popupTemplates: PopupTemplateEntry[] = [
     {

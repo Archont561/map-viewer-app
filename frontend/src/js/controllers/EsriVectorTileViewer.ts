@@ -4,15 +4,10 @@ import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import PopupTemplate from "@arcgis/core/PopupTemplate";
 import Popup from "@arcgis/core/widgets/Popup";
-import { type ArcgisMap } from '@arcgis/map-components/dist/components/arcgis-map';
-import { type ArcgisLayerList } from '@arcgis/map-components/dist/components/arcgis-layer-list';
-import { PopupTemplatePropertiesBuilder } from "../data/vectorTileLayersOptions";
+import type {  ArcgisMap } from '@arcgis/map-components/dist/components/arcgis-map';
+import type { ArcgisLayerList } from '@arcgis/map-components/dist/components/arcgis-layer-list';
+import { VectorTileSource, PopupTemplatePropertiesBuilder } from "../types";
 
-interface VectorTileSource {
-    vectorTile: VectorTileLayer;
-    featureLayer: FeatureLayer;
-    popupTemplate: PopupTemplate;
-}
 
 export default class EsriVectorTileViewer {
     private tiles = [] as VectorTileSource[];
