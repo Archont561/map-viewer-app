@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode demo",
     "build": "vite build",
     "preview": "vite preview"
   }
