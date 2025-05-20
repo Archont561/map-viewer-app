@@ -1,10 +1,8 @@
 import "../css/main.css";
+import "./webComponents.import";
 import esriConfig from "@arcgis/core/config";
 import EsriVectorTileViewer from "./controllers/EsriVectorTileViewer";
 import vectorTilesOptions from "./data/vectorTileLayersOptions";
-import "@arcgis/map-components/dist/components/arcgis-map";
-import "@arcgis/map-components/dist/components/arcgis-layer-list";
-
 
 window.addEventListener("DOMContentLoaded", () => {
     // @ts-ignore
