@@ -1,8 +1,8 @@
-export type PopupTemplatePropertiesBuilder = (
+export declare type PopupTemplatePropertiesBuilder = (
     sourceFeatureLayer?: __esri.FeatureLayer
 ) => __esri.PopupTemplateProperties;
 
-interface PopupTemplateEntry {
+export declare interface PopupTemplateEntry {
     id: string;
     popupTemplatePropertiesBuilder: PopupTemplatePropertiesBuilder;
 }
