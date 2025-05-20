@@ -1,6 +1,6 @@
 import path from "path";
 import { defineConfig } from "vite";
-import tailwindcss from "@tailwindcss/vite"
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   base: "/map-viewer-app/",
@@ -15,6 +15,12 @@ export default defineConfig({
     }
   },
   server: {
-    open: true
+    open: true,
+    fs: {
+      allow: [
+        path.resolve(__dirname),
+        path.join(path.resolve(__dirname, ".."), 'node_modules/@arcgis/core/assets'),
+      ]
+    }
   }
 })

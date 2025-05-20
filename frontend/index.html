@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + Tailwind CSS</title>
-</head>
-<body class="h-dvh w-dvw">
-
-  <div id="arcgis-map-1" class="size-full"></div>
-
+  <title>Granice II Rzeczypospolitej</title>
 
   <script type="module" src="./src/js/main.ts"></script>
+</head>
+<body class="h-dvh w-dvw">
+   <arcgis-map class="size-full" id="arcgis-map-1" center="19.4803, 52.0665" zoom="5">
+      <arcgis-zoom position="top-left"></arcgis-zoom>
+      <arcgis-layer-list position="top-right"></arcgis-layer-list>
+   </arcgis-map>
+   
 </body>
 </html>
