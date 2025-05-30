@@ -6,7 +6,7 @@ import PopupTemplate from "@arcgis/core/PopupTemplate";
 import Popup from "@arcgis/core/widgets/Popup";
 import type {  ArcgisMap } from '@arcgis/map-components/dist/components/arcgis-map';
 import type { ArcgisLayerList } from '@arcgis/map-components/dist/components/arcgis-layer-list';
-import { VectorTileSource, PopupTemplatePropertiesBuilder } from "../types";
+import { VectorTileSource, PopupTemplatePropertiesBuilder } from "../@types";
 
 
 export default class EsriVectorTileViewer {

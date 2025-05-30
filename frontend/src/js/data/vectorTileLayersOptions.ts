@@ -1,4 +1,4 @@
-import { PopupTemplateEntry, PopupTemplatePropertiesBuilder } from "../types";
+import { PopupTemplateEntry } from "../@types";
 
 const popupTemplates: PopupTemplateEntry[] = [
     {
