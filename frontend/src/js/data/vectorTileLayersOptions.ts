@@ -24,7 +24,14 @@ const popupTemplates: PopupTemplateEntry[] = [
             title: "Gmina {gm}",
             content: (feature: __esri.Feature) => {
                 if (!feature) return;
-                return ``;
+                const { siedz_gmin, typ } = feature?.graphic?.attributes;
+                const typDomain = sourceFeatureLayer?.getFieldDomain("typ") as __esri.CodedValueDomain;
+                return `<ul class="grid grid-cols-[auto_1fr] gap-1 text-sm">
+                    <li class="font-medium">Granica:</li>
+                    <li class="text-right">${typDomain.getName(typ)}</li>
+                    <li class="font-medium">Siedziba gminy:</li>
+                    <li class="text-right">${siedz_gmin}</li>
+                </ul>`;
             }
         }),
     },
@@ -34,7 +41,12 @@ const popupTemplates: PopupTemplateEntry[] = [
             title: "Granica Gminy {gm}",
             content: (feature: __esri.Feature) => {
                 if (!feature) return;
-                return ``;
+                const { granica } = feature?.graphic?.attributes;
+                const granicaDomain = sourceFeatureLayer?.getFieldDomain("granica") as __esri.CodedValueDomain;
+                return `<ul class="grid grid-cols-[auto_1fr] gap-1 text-sm">
+                    <li class="font-medium">Granica:</li>
+                    <li class="text-right">${granicaDomain.getName(granica)}</li>
+                </ul>`;
             }
         }),
     }
