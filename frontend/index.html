@@ -10,7 +10,20 @@
 <body class="h-dvh w-dvw">
    <arcgis-map class="size-full" id="arcgis-map-1" center="19.4803, 52.0665" zoom="5">
       <arcgis-zoom position="top-left"></arcgis-zoom>
-      <arcgis-layer-list position="top-right"></arcgis-layer-list>
+      <arcgis-home position="top-left"></arcgis-home>
+      <arcgis-basemap-toggle position="top-right"></arcgis-basemap-toggle>
+      <arcgis-layer-list 
+         position="top-right"
+         show-heading
+         show-collapse-button
+         selection-mode="single"
+         drag-enabled
+      ></arcgis-layer-list>
+      <arcgis-scale-bar
+         position="bottom-left"
+         bar-style="line"
+         unit="metric"
+      ></arcgis-scale-bar>
    </arcgis-map>
    
 </body>
