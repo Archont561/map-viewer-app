@@ -61,6 +61,9 @@ export default class EsriVectorTileViewer {
         
         if (!this.tiles.length) {
             this.arcgisMapContainer.view.goTo(vectorTile.fullExtent?.center);
+            vectorTile.visible = true;
+        } else {
+            vectorTile.visible = false;
         }
         this.arcgisMapContainer.map.add(vectorTile);
         this.tiles.push({
