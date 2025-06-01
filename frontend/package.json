@@ -3,6 +3,6 @@
   "scripts": {
     "dev": "vite --mode demo",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
   }
 }

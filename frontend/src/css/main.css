@@ -3,3 +3,5 @@
 @import "../../../node_modules/@arcgis/core/assets/esri/themes/light/main.css";
 @import "../../../node_modules/@esri/calcite-components/dist/calcite/calcite.css";
 @import "tailwindcss";
+
+@source "../../../";
