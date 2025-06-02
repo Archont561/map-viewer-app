@@ -17,6 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: github.event.inputs.deploy_command == 'deploy-frontend'
+    environment: github-pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,9 +32,9 @@ jobs:
         run: npm ci
 
       - name: Build Astro site
-        env:
-          PUBLIC_ESRI_API_KEY: ${{ vars.PUBLIC_ESRI_API_KEY }}
-        run: npm run build:frontend
+        run: |
+          echo "PUBLIC_ESRI_API_KEY=${{ vars.PUBLIC_ESRI_API_KEY }}" > ./frontend/.env.production
+          npm run build:frontend
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
