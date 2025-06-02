@@ -1,5 +1,10 @@
 ---
 import EsriVectorTileViewer from "../components/EsriVectorTileViewer.astro";
+import mainCSSURL from "../assets/styles/main.css?url";
+import esriCalciteCSSURL from "@esri/calcite-components/dist/calcite/calcite.css?url";
+import arcgisMapComponentCSSURL from "@arcgis/map-components/dist/arcgis-map-components/arcgis-map-components.css?url";
+import arcgisLightThemeCssURL from "@arcgis/core/assets/esri/themes/light/main.css?url";
+import arcgisDarkThemeCssURL from "@arcgis/core/assets/esri/themes/dark/main.css?url";
 ---
 
 <!doctype html>
@@ -10,14 +15,21 @@ import EsriVectorTileViewer from "../components/EsriVectorTileViewer.astro";
       <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       <meta name="generator" content={Astro.generator} />
       <title>Granice II Rzeczypospolitej</title>
-
+        <link rel="stylesheet" href={mainCSSURL} />
+        <link rel="stylesheet" href={esriCalciteCSSURL} />
+        <link rel="stylesheet" href={arcgisMapComponentCSSURL} />
+        <link
+            id="arcgis-maps-sdk-theme-light"
+            rel="stylesheet"
+            href={arcgisLightThemeCssURL}
+        />
+        <link
+            disabled
+            id="arcgis-maps-sdk-theme-dark"
+            rel="stylesheet"
+            href={arcgisDarkThemeCssURL}
+        />
       <script>
-         import "../assets/styles/main.css";
-         import "@esri/calcite-components/dist/calcite/calcite.css";
-         import "@arcgis/map-components/dist/arcgis-map-components/arcgis-map-components.css";
-         import "@arcgis/core/assets/esri/themes/light/main.css";
-         // import "@arcgis/core/assets/esri/themes/dark/main.css";
-
          import "@arcgis/map-components/components/arcgis-map";
          import "@arcgis/map-components/components/arcgis-zoom";
          import "@arcgis/map-components/components/arcgis-basemap-toggle";
