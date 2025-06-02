@@ -1,31 +1,11 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "lib": [
-        "ES2017",
-        "DOM"
-      ],
-      "module": "ESNext",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "experimentalDecorators": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "resolveJsonModule": true,
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "typeRoots": [
-        "node_modules/@types", 
-        "node_modules/@arcgis/core", 
-      ]
-    },
-    "include": [
-      "./src/js/*.ts",
-      "./src/js/**/*.ts",
-    ],
-    "exclude": [
-      "dist",
-      "node_modules"
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "typeRoots": [
+      "src/types",
+      "node_modules/@types"
     ]
-  }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}

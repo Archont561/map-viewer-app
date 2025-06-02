@@ -1,8 +1,8 @@
 {
   "name": "frontend",
   "scripts": {
-    "dev": "vite --mode demo",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "astro dev --mode demo",
+    "build": "astro build",
+    "preview": "astro preview"
   }
 }

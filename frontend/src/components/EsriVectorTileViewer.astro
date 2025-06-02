@@ -1,0 +1,124 @@
+---
+const { ...rest } = Astro.props;
+---
+
+<arcgis-map {...rest}>
+    <slot />
+</arcgis-map>
+
+<script>
+    import { first, find } from "lodash";
+    import EsriMap from "@arcgis/core/Map";
+    import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
+    import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+    import PopupTemplate from "@arcgis/core/PopupTemplate";
+    import Popup from "@arcgis/core/widgets/Popup";
+    import type { ArcgisMap } from "@arcgis/map-components/dist/components/arcgis-map";
+    import type { ArcgisLayerList } from "@arcgis/map-components/dist/components/arcgis-layer-list";
+
+    class EsriVectorTileViewer {
+        private tiles = [] as VectorTileSource[];
+        arcgisMapContainer: ArcgisMap;
+        layerList: ArcgisLayerList;
+
+        constructor(containerID: string) {
+            this.arcgisMapContainer = document.getElementById(
+                containerID,
+            ) as ArcgisMap;
+            this.layerList = this.arcgisMapContainer.querySelector(
+                "arcgis-layer-list",
+            ) as ArcgisLayerList;
+            this.arcgisMapContainer.map = new EsriMap({
+                basemap: "arcgis/light-gray",
+            });
+            this.setupClickHandler();
+        }
+
+        private setupClickHandler() {
+            this.arcgisMapContainer.popupDisabled = true;
+            this.arcgisMapContainer.popup = new Popup();
+
+            this.arcgisMapContainer.addEventListener(
+                "arcgisViewClick",
+                async (e) => {
+                    const hit = await this.arcgisMapContainer.hitTest(
+                        (e as CustomEvent).detail,
+                    );
+                    if (!hit.results.length) return;
+
+                    const tile = find(this.tiles, (tile) => {
+                        const layer = hit.results[0].layer;
+                        return tile.vectorTile.id === layer?.id;
+                    });
+                    if (!tile) return;
+
+                    const graphic = (hit.results[0] as __esri.GraphicHit)
+                        .graphic;
+                    graphic.popupTemplate = tile.popupTemplate;
+                    this.arcgisMapContainer.openPopup({
+                        features: [graphic],
+                        location: (e as CustomEvent).detail
+                            .mapPoint as __esri.Point,
+                    });
+                },
+            );
+        }
+
+        async addVectorTile(
+            id: string,
+            popupTemplatePropertiesBuilder: PopupTemplatePropertiesBuilder,
+        ) {
+            const vectorTile = new VectorTileLayer({ portalItem: { id } });
+            await vectorTile.load();
+            const relatedLayer = first(
+                await vectorTile.portalItem?.fetchRelatedItems({
+                    direction: "forward",
+                    relationshipType: "Service2Data",
+                }),
+            );
+            if (!relatedLayer) return;
+
+            const featureLayer = new FeatureLayer({
+                url: `${relatedLayer.url}/0`,
+            });
+            await featureLayer.load();
+            if (!featureLayer.loaded) return;
+
+            if (!this.tiles.length) {
+                this.arcgisMapContainer.view.goTo(
+                    vectorTile.fullExtent?.center,
+                );
+                vectorTile.visible = true;
+            } else {
+                vectorTile.visible = false;
+            }
+            this.arcgisMapContainer.map.add(vectorTile);
+            this.tiles.push({
+                vectorTile,
+                featureLayer,
+                popupTemplate: new PopupTemplate(
+                    popupTemplatePropertiesBuilder(featureLayer),
+                ),
+            });
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const esriVTViewer = new EsriVectorTileViewer("arcgis-map-1");
+
+        esriVTViewer.arcgisMapContainer.addEventListener(
+            "arcgisViewReadyChange",
+            async (event) => {
+                const vectorTilesOptions = (
+                    await import("../assets/data/vectorTileLayersOptions")
+                ).default;
+                vectorTilesOptions.forEach((option) => {
+                    esriVTViewer.addVectorTile(
+                        option.id,
+                        option.popupTemplatePropertiesBuilder,
+                    );
+                });
+            },
+        );
+    });
+</script>

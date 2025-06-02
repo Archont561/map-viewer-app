@@ -1,5 +1,3 @@
-import { PopupTemplateEntry } from "../@types";
-
 const popupTemplates: PopupTemplateEntry[] = [
     {
         id: "1cc8ca0bfdb94d07adc1bb0c11f7fcaa",
