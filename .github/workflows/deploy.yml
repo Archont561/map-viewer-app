@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Astro Frontend to GitHub Pages
 
 on:
   push:
@@ -14,14 +14,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        env:
-          PUBLIC_ESRI_API_KEY: "AAPTxy8BH1VEsoebNVZXo8HurKD6yIkipbr7ZYMBEYDGKxOiYw6kuNHzCsGmHKwYPDnlUbt05f8DoEVNuCqKhvCsQ2m3xGsWJF6phDz-wI7LHuHq2Q9-Wigj-C-w7ldJRDrWRxH8Zs-IZQ3-6kpMUp1-bYiBnC4ZgodJ7G5WqjJtsXWXccPMWV9algrkR26a3uWPiR4enh1czm9kwpxwlh05-oV29QyQrjD7E2PrIIkT059Ysk0F0LIWHt0UE_cgaPUDAT1_FYQk4X4S"
 
-        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: frontend
+
+      - name: Build Astro site
+        env: # Pass your environment variables here
+          PUBLIC_ESRI_API_KEY: ${{ secrets.PUBLIC_ESRI_API_KEY }}
+        run: npm run build
+        working-directory: frontend
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
