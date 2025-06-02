@@ -1,9 +1,12 @@
 name: Deploy Astro Frontend to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+    inputs:
+      deploy_command:
+        description: 'Command to trigger deployment (e.g., deploy-frontend)'
+        required: true
+        default: 'deploy-frontend'
 
 permissions:
   contents: read
@@ -13,6 +16,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event.inputs.deploy_command == 'deploy-frontend'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,15 +26,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install frontend dependencies only
         working-directory: frontend
+        run: npm ci
 
       - name: Build Astro site
-        env: # Pass your environment variables here
-          PUBLIC_ESRI_API_KEY: ${{ secrets.PUBLIC_ESRI_API_KEY }}
-        run: npm run build
-        working-directory: frontend
+        env:
+          PUBLIC_ESRI_API_KEY: ${{ vars.PUBLIC_ESRI_API_KEY }}
+        run: npm run build:frontend
 
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3

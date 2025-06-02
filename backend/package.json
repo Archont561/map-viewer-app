@@ -1,9 +1,21 @@
 {
   "name": "backend",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "npx tsc",
     "dev": "npx concurrently \"npx tsc --watch\" \"node dist/server.js\"",
     "start": "nodemon dist/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.17.1",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.14.0",
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.3"
   }
 }
