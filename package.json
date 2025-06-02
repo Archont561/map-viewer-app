@@ -2,9 +2,14 @@
     "name": "map-visualizer",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
-        "build": "npm run build --prefix frontend && npm run build --prefix backend",
+        "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+        "dev:frontend": "npm run dev --prefix frontend",
+        "dev:backend": "npm run dev --prefix backend",
+        "build": "npm run build:frontend && npm run build:backend",
+        "build:frontend": "npm run build --prefix frontend",
+        "build:backend": "npm run build --prefix backend",
         "start": "npm run start --prefix backend",
+        "astro": "astro",
         "deploy": "npm run build && gh-pages -d frontend/dist"
     },
     "dependencies": {
