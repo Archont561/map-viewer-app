@@ -2,32 +2,33 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        env:
+          PUBLIC_ESRI_API_KEY: "AAPTxy8BH1VEsoebNVZXo8HurKD6yIkipbr7ZYMBEYDGKxOiYw6kuNHzCsGmHKwYPDnlUbt05f8DoEVNuCqKhvCsQ2m3xGsWJF6phDz-wI7LHuHq2Q9-Wigj-C-w7ldJRDrWRxH8Zs-IZQ3-6kpMUp1-bYiBnC4ZgodJ7G5WqjJtsXWXccPMWV9algrkR26a3uWPiR4enh1czm9kwpxwlh05-oV29QyQrjD7E2PrIIkT059Ysk0F0LIWHt0UE_cgaPUDAT1_FYQk4X4S"
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install root dependencies
-        run: npm install
-
-      - name: Install frontend & build
-        run: |
-          npm install
-          npm run build
-
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: frontend/dist
+        id: deployment
+        uses: actions/deploy-pages@v4
